@@ -3,142 +3,274 @@ import johnImage from '../assets/ceo.jpeg'; // Replace with your actual image pa
 import janeImage from '../assets/cto.jpeg'; // Replace with your actual image path
 import emilyImage from '../assets/coo.jpeg'; // Replace with your actual image path
 import heroImage from '../assets/spesa.jpeg'; // Background image for About section
+import missionImage from '../assets/employee.jpeg';
+import storyImage from '../assets/biometric.jpeg';
+import visionImage from '../assets/cardImage.jpeg';
+import marketImage from '../assets/salaryImage.jpeg';
 
 const About = () => {
-  // Inline styles
   const sectionStyle = {
     padding: '4rem 1.5rem',
-    backgroundImage: `url(${heroImage})`, // Set the background to the same image as the Hero section
-    backgroundSize: 'cover', // Cover the entire section
-    backgroundPosition: 'center', // Center the image
-    color: 'black', // Change text color to black for contrast
-    textAlign: 'left', // Align text to the left
+    backgroundImage: `url(${heroImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    color: 'black',
+    textAlign: 'left',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    '@media (max-width: 768px)': {
+      padding: '2rem 1rem',
+    },
+  };
+
+  const sectionCardStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    padding: '2rem',
+    borderRadius: '1rem',
+    marginBottom: '2rem',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '1000px',
+    margin: '0 auto 2rem',
+    backdropFilter: 'blur(8px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    '&:hover': {
+      transform: 'translateY(-5px)',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    },
+    '@media (max-width: 768px)': {
+      padding: '1.5rem',
+      marginBottom: '1.5rem',
+      maxWidth: '400px',
+    },
+  };
+
+  const sectionImageStyle = {
+    width: '100%',
+    height: '200px',
+    objectFit: 'cover',
+    borderRadius: '0.5rem',
+    marginBottom: '1.5rem',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+  };
+
+  const sectionContentStyle = {
+    flex: 1,
+    position: 'relative',
+    zIndex: 1,
   };
 
   const titleStyle = {
-    fontSize: '3rem',
-    fontWeight: 'bold',
-    color: '#1d4ed8', // Consistent blue color for titles
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    color: '#1d4ed8',
     marginBottom: '1rem',
-    textAlign: 'left', // Ensure title is left-aligned for About Us
-  };
-
-  const leadershipTitleStyle = {
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    marginBottom: '1rem',
-    color: '#1d4ed8', // Dark blue color for titles
-    textAlign: 'center', // Center the title for Leadership Team
+    textAlign: 'left',
+    textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    '@media (max-width: 768px)': {
+      fontSize: '1.25rem',
+      marginBottom: '0.75rem',
+    },
   };
 
   const paragraphStyle = {
-    fontSize: '1.25rem',
-    marginBottom: '1.5rem',
-    maxWidth: '800px',
-    margin: '0 0 1.5rem 0', // Remove auto margin and add bottom margin for spacing
-    lineHeight: '1.6', // Improved line height for readability
-    color: 'black', // Change paragraph color to black
-    padding: '0 1rem', // Add horizontal padding for smaller screens
+    fontSize: '1rem',
+    color: '#64748b',
+    lineHeight: '1.6',
+    marginBottom: '1rem',
+    textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)',
+    '@media (max-width: 768px)': {
+      fontSize: '0.9rem',
+      lineHeight: '1.4',
+    },
+  };
+
+  const listStyle = {
+    listStyleType: 'disc',
+    paddingLeft: '1.25rem',
+    marginBottom: '0.75rem',
+    '@media (max-width: 768px)': {
+      paddingLeft: '1rem',
+      marginBottom: '0.5rem',
+    },
+  };
+
+  const listItemStyle = {
+    marginBottom: '0.35rem',
+    fontSize: '0.95rem',
+    lineHeight: '1.4',
+    color: '#64748b',
+    textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)',
+    '@media (max-width: 768px)': {
+      fontSize: '0.85rem',
+      marginBottom: '0.25rem',
+    },
+  };
+
+  const leadershipTitleStyle = {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: '#1d4ed8',
+    textAlign: 'center',
+    textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    '@media (max-width: 768px)': {
+      fontSize: '1.5rem',
+      marginBottom: '0.75rem',
+    },
   };
 
   const leadershipStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    marginTop: '2rem',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '2rem',
+    maxWidth: '1000px',
+    margin: '2rem auto',
+    padding: '0 1rem',
+    '@media (max-width: 768px)': {
+      gap: '1.5rem',
+      padding: '0 0.5rem',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    },
   };
 
   const teamMemberStyle = {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Light background for team member cards
-    borderRadius: '0.5rem',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: '1rem',
     padding: '2rem',
-    margin: '1rem',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    width: '250px',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
     textAlign: 'center',
-    transition: 'transform 0.3s', // Add transition for hover effect
-  };
-
-  const teamMemberHoverStyle = {
-    transform: 'scale(1.05)', // Slightly enlarge on hover
+    transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '&:hover': {
+      transform: 'translateY(-5px)',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    },
+    '@media (max-width: 768px)': {
+      padding: '1.5rem',
+    },
   };
 
   const imageStyle = {
-    width: '150px', // Increased width for better visibility
-    height: '150px', // Fixed height for uniformity
-    objectFit: 'cover', // Cover the area without distortion
-    borderRadius: '0.5rem', // Rounded corners for the image
-    marginBottom: '1rem', // Space between image and text
+    width: '140px',
+    height: '140px',
+    objectFit: 'cover',
+    borderRadius: '50%',
+    marginBottom: '1.5rem',
+    border: '4px solid rgba(29, 78, 216, 0.1)',
+    transition: 'all 0.3s ease',
+    '@media (max-width: 768px)': {
+      width: '120px',
+      height: '120px',
+      marginBottom: '1rem',
+    },
   };
 
-  const whyUsStyle = {
-    marginTop: '4rem',
-    padding: '2rem',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slightly opaque for contrast
-    borderRadius: '0.5rem',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center', // Center the content
-    textAlign: 'center', // Center the text
+  const nameStyle = {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#1d4ed8',
+    marginBottom: '0.35rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1.1rem',
+    },
+  };
+
+  const roleStyle = {
+    fontSize: '1rem',
+    color: '#64748b',
+    marginBottom: '0.75rem',
+    fontWeight: '500',
+    '@media (max-width: 768px)': {
+      fontSize: '0.9rem',
+      marginBottom: '0.5rem',
+    },
+  };
+
+  const bioStyle = {
+    fontSize: '0.9rem',
+    color: '#64748b',
+    lineHeight: '1.4',
+    '@media (max-width: 768px)': {
+      fontSize: '0.85rem',
+    },
   };
 
   return (
     <div>
-      {/* About Us Section */}
       <section style={sectionStyle}>
-        <h2 style={titleStyle}>About Us</h2>
-        <p style={paragraphStyle}>
-          StaffPesa is dedicated to providing innovative financial solutions that empower individuals and businesses. Our mission is to simplify financial management and enhance the user experience through technology.
-        </p>
-        <p style={paragraphStyle}>
-          With a focus on security, efficiency, and user satisfaction, we strive to be the leading mobile payment solution in the market.
-        </p>
-        <p style={paragraphStyle}>
-          Our team is committed to continuous improvement and innovation, ensuring that our users have access to the best financial tools available.
-        </p>
-      </section>
+        <div style={sectionCardStyle}>
+          <img src={missionImage} alt="Our Mission" style={sectionImageStyle} />
+          <div style={sectionContentStyle}>
+            <h2 style={titleStyle}>Our Mission</h2>
+            <p style={paragraphStyle}>
+              At StaffMa, we are on a mission to transform how African SMEs manage their most valuable asset - their people. Through our flagship financial service, StaffPesa, we combine traditional HR management with modern financial technology to create a more efficient, transparent, and empowering work environment.
+            </p>
+          </div>
+        </div>
 
-      {/* Why Choose Us Section */}
-      <div style={whyUsStyle}>
-        <h2 style={titleStyle}>Why Choose Us?</h2>
-        <p style={paragraphStyle}>
-          Our commitment to innovation, security, and customer satisfaction sets us apart. We provide:
-        </p>
-        <p style={paragraphStyle}>
-          - A user-friendly mobile app that simplifies your financial transactions.
-        </p>
-        <p style={paragraphStyle}>
-          - Secure transactions that protect your data and funds.
-        </p>
-        <p style={paragraphStyle}>
-          - 24/7 customer support to assist you whenever you need help.
-        </p>
-        <p style={paragraphStyle}>
-          - Competitive fees that ensure you get the best value for your money.
-        </p>
-      </div>
+        <div style={sectionCardStyle}>
+          <img src={storyImage} alt="Our Story" style={sectionImageStyle} />
+          <div style={sectionContentStyle}>
+            <h2 style={titleStyle}>Our Story</h2>
+            <p style={paragraphStyle}>
+              Founded in 2023, StaffMa was born out of the frustration experienced by African business owners who struggled with manual HR processes, complex payroll calculations, and inefficient financial systems. Our team of HR experts and financial technology specialists came together to create StaffPesa, a comprehensive solution that addresses these pain points, resulting in a platform that not only streamlines business operations but also promotes financial inclusion.
+            </p>
+          </div>
+        </div>
+
+        <div style={sectionCardStyle}>
+          <img src={visionImage} alt="Our Vision" style={sectionImageStyle} />
+          <div style={sectionContentStyle}>
+            <h2 style={titleStyle}>Our Vision</h2>
+            <p style={paragraphStyle}>
+              We envision a future where every African SME has access to world-class HR management tools through StaffMa, and every employee enjoys seamless financial services via StaffPesa, regardless of their location or background. We are committed to driving innovation in the HR and financial technology space, with a focus on creating solutions that are tailored to the unique needs of African businesses.
+            </p>
+          </div>
+        </div>
+
+        <div style={sectionCardStyle}>
+          <img src={marketImage} alt="Target Market" style={sectionImageStyle} />
+          <div style={sectionContentStyle}>
+            <h2 style={titleStyle}>Target Market & Growth</h2>
+            <p style={paragraphStyle}>
+              Through StaffMa and our financial service StaffPesa, we serve a vast and growing market:
+            </p>
+            <ul style={listStyle}>
+              <li style={listItemStyle}>Over 1.56 million registered SMEs in Kenya</li>
+              <li style={listItemStyle}>Initial focus on Kenya with established banking relationships</li>
+              <li style={listItemStyle}>Planned expansion to East African Community</li>
+              <li style={listItemStyle}>Growing demand for digital HR and financial solutions</li>
+              <li style={listItemStyle}>Strong focus on financial inclusion and employee empowerment through StaffPesa</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* Our Leadership Team Section */}
       <h2 style={leadershipTitleStyle}>Our Leadership Team</h2>
       <div style={leadershipStyle}>
-        <div style={teamMemberStyle} onMouseOver={(e) => e.currentTarget.style.transform = teamMemberHoverStyle.transform} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+        <div style={teamMemberStyle}>
           <img src={johnImage} alt="Adan kalla" style={imageStyle} />
-          <h3>Adan Kalla</h3>
-          <p>CEO</p>
-          <p>Adan has over 10 years of experience in the financial technology sector.</p>
+          <h3 style={nameStyle}>Adan Kalla</h3>
+          <p style={roleStyle}>CEO</p>
+          <p style={bioStyle}>Adan has over 10 years of experience in the financial technology sector.</p>
         </div>
-        <div style={teamMemberStyle} onMouseOver={(e) => e.currentTarget.style.transform = teamMemberHoverStyle.transform} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+        <div style={teamMemberStyle}>
           <img src={janeImage} alt="Asia Kala" style={imageStyle} />
-          <h3>Asia Kala</h3>
-          <p>CTO</p>
-          <p>Asia is an expert in software development and leads our tech innovations.</p>
+          <h3 style={nameStyle}>Asia Kala</h3>
+          <p style={roleStyle}>CTO</p>
+          <p style={bioStyle}>Asia is an expert in software development and leads our tech innovations.</p>
         </div>
-        <div style={teamMemberStyle} onMouseOver={(e) => e.currentTarget.style.transform = teamMemberHoverStyle.transform} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+        <div style={teamMemberStyle}>
           <img src={emilyImage} alt="Lule Kala" style={imageStyle} />
-          <h3>Lule Kala</h3>
-          <p>CFO</p>
-          <p>Lule manages our financial strategies and ensures fiscal responsibility.</p>
+          <h3 style={nameStyle}>Lule Kala</h3>
+          <p style={roleStyle}>CFO</p>
+          <p style={bioStyle}>Lule manages our financial strategies and ensures fiscal responsibility.</p>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <nav style={navbarStyle}>
-      <div style={logoStyle}>StaffPesa</div>
+      <div style={logoStyle}>Staffma</div>
       <div style={navLinksContainerStyle}>
         <Link to="/" style={linkStyle}>Home</Link>
         <Link to="/about" style={linkStyle}>About Us</Link>
@@ -48,3 +48,5 @@ const Navbar = () => {
 };
 
 export default Navbar; 
+
+
