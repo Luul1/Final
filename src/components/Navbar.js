@@ -1,49 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import './Navbar.css';
 
 const Navbar = () => {
-  // Inline styles
-  const navbarStyle = {
-    backgroundColor: 'white', // Set background to white
-    padding: '1rem 1.5rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    color: '#1d4ed8', // Dark blue text for contrast
-    position: 'relative',
-    flexWrap: 'wrap', // Allow wrapping for mobile responsiveness
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)', // Optional: Add a subtle shadow for depth
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const linkStyle = {
-    color: '#1d4ed8', // Dark blue for links
-    textDecoration: 'none',
-    margin: '0 1rem',
-    fontWeight: '500',
-    transition: 'color 0.3s',
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-  const logoStyle = {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const navLinksContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'flex-end', // Align links to the right
-  };
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.nav-menu') && !event.target.closest('.menu-button')) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const menuItems = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/features', label: 'Features' },
+    { path: '/contact', label: 'Contact' },
+  ];
 
   return (
-    <nav style={navbarStyle}>
-      <div style={logoStyle}>Staffma</div>
-      <div style={navLinksContainerStyle}>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/about" style={linkStyle}>About Us</Link>
-        <Link to="/contact" style={linkStyle}>Contact</Link>
-      </div>
-    </nav>
+    <>
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="nav-container">
+          <Link to="/" className="nav-logo">
+            StaffMa
+          </Link>
+
+          <button
+            className="menu-button"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+          </button>
+
+          <div className={`nav-menu ${isOpen ? 'open' : ''}`}>
+            {menuItems.map((item, index) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="nav-link"
+                style={{
+                  transitionDelay: isOpen ? `${index * 0.1}s` : '0s',
+                }}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link 
+              to="/request-demo" 
+              className="cta-button"
+              onClick={() => setIsOpen(false)}
+            >
+              Request Demo
+            </Link>
+          </div>
+        </div>
+      </nav>
+      <div className={`menu-overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)} />
+    </>
   );
 };
 

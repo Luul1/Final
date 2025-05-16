@@ -4,43 +4,57 @@ import { Link } from 'react-router-dom'; // Import Link for navigation
 const Footer = () => {
   // Inline styles
   const footerStyle = {
-    backgroundColor: '#1d4ed8', // Blue background
-    color: 'white',
-    padding: '2rem 0',
+    background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+    color: '#ffffff',
+    padding: '3rem 0',
     textAlign: 'center',
+    position: 'relative',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: '4px',
+      background: 'linear-gradient(90deg, #4169E1, #9370DB)',
+    },
   };
 
   const linkStyle = {
-    color: '#fbbf24', // Yellow color for links
+    color: '#ffffff',
     textDecoration: 'none',
     margin: '0 1rem',
+    transition: 'color 0.3s ease',
+    '&:hover': {
+      color: '#9370DB',
+    },
   };
 
   const navStyle = {
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
   };
 
   const linkContainerStyle = {
     display: 'flex',
     justifyContent: 'center',
-    gap: '1rem',
+    gap: '2rem',
     flexWrap: 'wrap',
   };
 
   return (
     <footer style={footerStyle}>
       <div>
-        <h3>Connect with StaffMa</h3>
+        <h3 style={{ color: '#9370DB', marginBottom: '1.5rem', fontSize: '1.5rem' }}>Connect with StaffMa</h3>
         <nav style={navStyle}>
           <div style={linkContainerStyle}>
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
-            <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>About Us</Link>
-            <Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact</Link>
-            <Link to="/services" style={{ color: 'white', textDecoration: 'none' }}>Services</Link>
+            <Link to="/" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.3s ease', '&:hover': { color: '#9370DB' } }}>Home</Link>
+            <Link to="/about" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.3s ease', '&:hover': { color: '#9370DB' } }}>About</Link>
+            <Link to="/features" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.3s ease', '&:hover': { color: '#9370DB' } }}>Features</Link>
+            <Link to="/contact" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.3s ease', '&:hover': { color: '#9370DB' } }}>Contact</Link>
           </div>
         </nav>
       </div>
-      <p>&copy; {new Date().getFullYear()} StaffMa. All rights reserved.</p>
+      <p style={{ color: '#a0a0a0', marginTop: '1.5rem' }}>&copy; {new Date().getFullYear()} StaffMa. All rights reserved.</p>
     </footer>
   );
 };

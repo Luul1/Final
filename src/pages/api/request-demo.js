@@ -7,17 +7,6 @@ export default async function handler(req, res) {
 
   const { name, email, phone, company, message } = req.body;
 
-  // Validate required fields
-  if (!name || !email || !phone || !company || !message) {
-    return res.status(400).json({ message: 'All fields are required' });
-  }
-
-  // Validate email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ message: 'Invalid email format' });
-  }
-
   // Create a transporter using SMTP
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -29,49 +18,40 @@ export default async function handler(req, res) {
     },
   });
 
-  // Verify SMTP connection configuration
   try {
-    await transporter.verify();
-  } catch (error) {
-    console.error('SMTP connection error:', error);
-    return res.status(500).json({ message: 'Email service configuration error' });
-  }
-
-  try {
-    // Email to admin
+    // Email to the company
     await transporter.sendMail({
-      from: `"StaffPesa Demo Request" <${process.env.SMTP_USER}>`,
-      to: process.env.ADMIN_EMAIL,
-      subject: 'New Demo Request',
+      from: process.env.SMTP_USER,
+      to: 'lulyabdy@gmail.com',
+      subject: 'New StaffPesa Demo Request',
       html: `
         <h2>New Demo Request</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Message:</strong> ${message}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
       `,
     });
 
-    // Confirmation email to user
+    // Confirmation email to the user
     await transporter.sendMail({
-      from: `"StaffPesa" <${process.env.SMTP_USER}>`,
+      from: process.env.SMTP_USER,
       to: email,
-      subject: 'Thank you for requesting a demo',
+      subject: 'Thank you for requesting a StaffPesa demo',
       html: `
         <h2>Thank you for your interest in StaffPesa!</h2>
         <p>Dear ${name},</p>
-        <p>We have received your demo request and will contact you shortly to schedule a demonstration of our platform.</p>
-        <p>Best regards,<br>The Staffma Team</p>
+        <p>We have received your demo request and will contact you shortly to schedule a personalized demonstration of our platform.</p>
+        <p>In the meantime, if you have any questions, please don't hesitate to contact us at lulyabdy@gmail.com.</p>
+        <p>Best regards,<br>The StaffPesa Team</p>
       `,
     });
 
     res.status(200).json({ message: 'Demo request sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ 
-      message: 'Failed to send demo request',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
+    res.status(500).json({ message: 'Failed to send demo request' });
   }
 } 

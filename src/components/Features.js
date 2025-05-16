@@ -15,7 +15,7 @@ import billPaymentImage from '../assets/Bill-payments.png';
 const Features = () => {
   const sectionStyle = {
     padding: '6rem 1rem',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#ffffff',
     position: 'relative',
     overflow: 'hidden',
   };
@@ -34,7 +34,7 @@ const Features = () => {
   const titleStyle = {
     fontSize: 'clamp(2rem, 4vw, 3rem)',
     fontWeight: '800',
-    color: '#1e293b',
+    color: '#9370DB',
     marginBottom: '1rem',
     position: 'relative',
     display: 'inline-block',
@@ -46,14 +46,14 @@ const Features = () => {
       transform: 'translateX(-50%)',
       width: '60px',
       height: '3px',
-      background: 'linear-gradient(90deg, #3b82f6, #60a5fa)',
+      background: '#9370DB',
       borderRadius: '2px',
     },
   };
 
   const subtitleStyle = {
     fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-    color: '#64748b',
+    color: '#4a5568',
     maxWidth: '600px',
     margin: '0 auto',
     lineHeight: '1.6',
@@ -70,13 +70,14 @@ const Features = () => {
     backgroundColor: '#ffffff',
     borderRadius: '1rem',
     padding: '2rem',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
     display: 'flex',
     flexDirection: 'column',
+    border: '1px solid #e5e7eb',
     '&:hover': {
       transform: 'translateY(-5px)',
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      boxShadow: '0 10px 15px rgba(0, 0, 0, 0.2)',
     },
   };
 
@@ -86,25 +87,50 @@ const Features = () => {
     objectFit: 'cover',
     borderRadius: '0.5rem',
     marginBottom: '1.5rem',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   };
 
   const iconStyle = {
     fontSize: '2.5rem',
-    color: '#3b82f6',
+    color: '#9370DB',
     marginBottom: '1.5rem',
   };
 
   const cardTitleStyle = {
     fontSize: '1.5rem',
     fontWeight: '600',
-    color: '#1e293b',
+    color: '#9370DB',
     marginBottom: '1rem',
   };
 
   const cardTextStyle = {
     fontSize: '1rem',
-    color: '#64748b',
+    color: '#4a5568',
     lineHeight: '1.6',
+  };
+
+  const financialServicesSectionStyle = {
+    marginTop: '6rem',
+    padding: '4rem 0',
+    background: 'linear-gradient(135deg, #4169E1, #9370DB)',
+    borderRadius: '2rem',
+  };
+
+  const financialServicesTitleStyle = {
+    ...titleStyle,
+    color: '#FFD700',
+    textAlign: 'center',
+  };
+
+  const financialServicesSubtitleStyle = {
+    ...subtitleStyle,
+    color: '#ffffff',
+  };
+
+  const financialServicesCardStyle = {
+    ...cardStyle,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
   };
 
   const features = [
@@ -205,20 +231,22 @@ const Features = () => {
           ))}
         </div>
 
-        <div style={{ marginTop: '6rem' }}>
-          <h2 style={{ ...titleStyle, textAlign: 'center' }}>StaffPesa Financial Services</h2>
-          <p style={{ ...subtitleStyle, marginBottom: '3rem' }}>
-            Comprehensive financial solutions powered by StaffMa for your employees
-          </p>
-          <div style={gridStyle}>
-            {financialServices.map((service, index) => (
-              <div key={index} style={cardStyle}>
-                <img src={service.image} alt={service.title} style={imageStyle} />
-                <div style={iconStyle}>{service.icon}</div>
-                <h3 style={cardTitleStyle}>{service.title}</h3>
-                <p style={cardTextStyle}>{service.description}</p>
-              </div>
-            ))}
+        <div style={financialServicesSectionStyle}>
+          <div style={containerStyle}>
+            <h2 style={financialServicesTitleStyle}>StaffPesa Financial Services</h2>
+            <p style={financialServicesSubtitleStyle}>
+              Comprehensive financial solutions powered by StaffMa for your employees
+            </p>
+            <div style={gridStyle}>
+              {financialServices.map((service, index) => (
+                <div key={index} style={financialServicesCardStyle}>
+                  <img src={service.image} alt={service.title} style={imageStyle} />
+                  <div style={iconStyle}>{service.icon}</div>
+                  <h3 style={cardTitleStyle}>{service.title}</h3>
+                  <p style={cardTextStyle}>{service.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

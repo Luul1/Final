@@ -6,7 +6,7 @@ import { faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 const Contact = () => {
   const sectionStyle = {
     padding: '6rem 1.5rem',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#ffffff',
   };
 
   const containerStyle = {
@@ -18,37 +18,39 @@ const Contact = () => {
   };
 
   const contactInfoStyle = {
-    backgroundColor: 'white',
-    padding: '2rem',
+    backgroundColor: '#ffffff',
+    padding: '2.5rem',
     borderRadius: '1rem',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #e5e7eb',
   };
 
   const formStyle = {
-    backgroundColor: 'white',
-    padding: '2rem',
+    backgroundColor: '#ffffff',
+    padding: '2.5rem',
     borderRadius: '1rem',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #e5e7eb',
   };
 
   const titleStyle = {
     fontSize: '2rem',
     fontWeight: 'bold',
     marginBottom: '2rem',
-    color: '#1d4ed8',
+    color: '#9370DB',
   };
 
   const infoItemStyle = {
     display: 'flex',
     alignItems: 'center',
     marginBottom: '1.5rem',
-    color: '#4b5563',
+    color: '#4a5568',
   };
 
   const iconStyle = {
     fontSize: '1.5rem',
     marginRight: '1rem',
-    color: '#1d4ed8',
+    color: '#9370DB',
   };
 
   const inputStyle = {
@@ -58,6 +60,12 @@ const Contact = () => {
     borderRadius: '0.5rem',
     border: '1px solid #e5e7eb',
     fontSize: '1rem',
+    backgroundColor: '#ffffff',
+    '&:focus': {
+      outline: 'none',
+      borderColor: '#9370DB',
+      boxShadow: '0 0 0 2px rgba(147, 112, 219, 0.2)',
+    },
   };
 
   const textareaStyle = {
@@ -67,17 +75,27 @@ const Contact = () => {
   };
 
   const buttonStyle = {
-    backgroundColor: '#1d4ed8',
-    color: 'white',
+    background: 'linear-gradient(45deg, #9370DB, #4169E1)',
+    color: '#ffffff',
     padding: '0.75rem 1.5rem',
     borderRadius: '0.5rem',
     border: 'none',
     fontSize: '1rem',
     fontWeight: '600',
     cursor: 'pointer',
-    transition: 'background-color 0.3s',
+    transition: 'all 0.3s ease',
     '&:hover': {
-      backgroundColor: '#1e40af',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 4px 12px rgba(147, 112, 219, 0.3)',
+    },
+  };
+
+  const linkStyle = {
+    color: '#9370DB',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease',
+    '&:hover': {
+      color: '#4169E1',
     },
   };
 
@@ -109,13 +127,13 @@ const Contact = () => {
           </div>
           <div style={infoItemStyle}>
             <FontAwesomeIcon icon={faWhatsapp} style={iconStyle} />
-            <a href="https://wa.me/+254724419991" target="_blank" rel="noopener noreferrer" style={{ color: '#4b5563' }}>
+            <a href="https://wa.me/+254724419991" target="_blank" rel="noopener noreferrer" style={linkStyle}>
               WhatsApp Us
             </a>
           </div>
           <div style={infoItemStyle}>
             <FontAwesomeIcon icon={faLinkedin} style={iconStyle} />
-            <a href="https://www.linkedin.com/in/lulekala/" target="_blank" rel="noopener noreferrer" style={{ color: '#4b5563' }}>
+            <a href="https://www.linkedin.com/in/lulekala/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
               LinkedIn
             </a>
           </div>
@@ -123,7 +141,7 @@ const Contact = () => {
 
         <div style={formStyle}>
           <h2 style={titleStyle}>Request a Demo</h2>
-          <p style={{ marginBottom: '2rem', color: '#4b5563' }}>
+          <p style={{ marginBottom: '2rem', color: '#4a5568' }}>
             Experience the power of Staffma firsthand with a personalized demo. Our team will walk you through the platform, highlighting the features that are most relevant to your business.
           </p>
           <form>
