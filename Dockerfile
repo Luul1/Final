@@ -1,38 +1,31 @@
-# Build stage for React frontend
-FROM node:16 AS frontend-build
-WORKDIR /app/frontend
-# Copy frontend package files
-COPY frontend/package*.json ./
-# Install frontend dependencies
+# Build stage
+FROM node:16 AS build
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package*.json ./
 RUN npm install
-# Copy frontend source code
-COPY frontend/ ./
-# Build the frontend
+
+# Copy the rest of the code
+COPY . .
+
+# Build the application
 RUN npm run build
 
-# Build stage for Node.js backend
-FROM node:16 AS backend-build
-WORKDIR /app
-# Copy backend package files
-COPY package*.json ./
-# Install backend dependencies
-RUN npm install --production
-# Copy backend source code
-COPY . .
-# Remove frontend directory to avoid duplication
-RUN rm -rf frontend
+# Production stage with Nginx
+FROM nginx:alpine
+# Copy built files to Nginx serve directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Final stage
-FROM node:16-slim
-WORKDIR /app
-# Copy built backend
-COPY --from=backend-build /app .
-# Copy built frontend files to your backend's public folder
-# Adjust the path if your backend serves static files from a different directory
-COPY --from=frontend-build /app/frontend/build ./public
+# Copy custom nginx config if needed
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose the port your app runs on
+# Expose port
 EXPOSE 8080
 
-# Command to run your app
-CMD ["npm", "start"]
+# Update Nginx to use the exposed port
+RUN sed -i.bak 's/listen\(.*\)80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
